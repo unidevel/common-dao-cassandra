@@ -1,0 +1,35 @@
+{
+  "name": "common-dao-cassandra",
+  "version": "0.1.0",
+  "description": "Cassandra dao helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unidevel/common-dao-cassandra.git"
+  },
+  "keywords": [
+    "common-dao",
+    "common-dao-cassandra",
+    "commondao",
+    "cassandra"
+  ],
+  "dependencies": {
+    "common-dao": "^0.1.0"
+  },
+  "engines": {
+    "node": ">= 4.2.0"
+  },
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "bugs": {
+    "url": "https://github.com/unidevel/common-dao-cassandra/issues"
+  },
+  "homepage": "https://github.com/unidevel/common-dao-cassandra"
+}
