@@ -44,9 +44,16 @@ function loadMetadata(client, table){
 
 
 class CassandraDaoAdapter {
-  constructor(table, getConnection, opts){
+  constructor(table, client){
     this.table = table;
-    this.getConnection = getConnection;
+    if ( typeof client == 'function' ) {
+      this.getConnection = client;
+    }
+    else {
+      this.getConnection = function(){
+        return client;
+      }
+    }
   }
 
   *ensureLoad(){
@@ -103,10 +110,20 @@ class CassandraDaoAdapter {
       });
     }
 	}
+
+  batch(scripts) {
+    var client = this.getConnection();
+    return function(callback){
+      var ddls = scripts.map((script)=>{
+        return {query: script[0], params:script[1]};
+      })
+      client.batch(ddls, {prepare: true}, callback);
+    }
+  }
 }
 
-module.exports = function createDao(table, getConnection, options){
+module.exports = function createDao(table, client){
   return createCommonDao(table, {
-    adapter: new CassandraDaoAdapter(table, getConnection, options)
+    adapter: new CassandraDaoAdapter(table, client)
   });
 }
